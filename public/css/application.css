@@ -1,0 +1,12 @@
+
+.padtop {
+    padding-top: 20px;
+}
+
+.center, input.center {
+    margin: auto;
+}
+
+.bold {
+    font-weight: bold;
+}

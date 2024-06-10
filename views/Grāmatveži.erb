@@ -1,0 +1,69 @@
+<div class="row">
+    <div class="text-center">
+        <h3>Grāmatveži</h3>
+    </div>
+</div>
+<% if iserror == 1 or iserror == 2 %><div class="row">
+    <div class="medium-4 columns"></div>
+    <div class="small-4 columns small-centered">
+        <% if iserror == 1 %><div class="alert-box warning radius text-center">Kļūda!</div>
+        <% else %><div class="alert-box success radius text-center">Darbība izpildīta!</div><% end %>
+    </div>
+    <div class="medium-4 columns"></div>
+</div><% end %>
+<div class="row padtop">
+        <table class="center">
+            <thead>
+                <tr>
+                    <th class="text-center">Grāmatvedis</th>
+                    <th class="text-center">E-pasts</th>
+                    <th class="text-center">Bloķēts</th>
+                    <th class="text-center">Izveidots</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <% bookkeepers.each do |b| %><tr>
+                    <form method="POST">
+                        <td><%= h b.Vārds %></td>
+                        <td><input type="text" id="email" name="email" value="<%= h b.Epasts %>" required="required" class="center" /></td>
+                        <td class="text-center"><input type="checkbox" id="blocked" name="blocked" class="center"<% if b.Bloķēts %> checked="checked"<% end %> /></td>
+                        <td><%= h b.created_at %></td>
+                        <td>
+                            <input type="hidden" name="id" value="<%= b.id %>" />
+                            <input type="submit" name="save" value="Saglabāt" class="tiny success button center" />
+                            <a href="/Admin/Grāmatveži/Dzēst/<%= b.id %>" class="tiny alert button center" />Izdzēst</a>
+                        </td>
+                    </form>
+                </tr><% end %>
+            </tbody>
+        </table>
+</div>
+<div class="row padtop">
+    <div class="text-center">
+        <h4>Pievienot jaunu grāmatvedi</h4>
+    </div>
+</div>
+<div class="row text-center">
+        <form method="POST">
+            <div class="row">
+                <div class="small-5 columns">
+                    <label for="username" class="right inline">Lietotājvārds</label>
+                </div>
+                <div class="small-3 columns">
+                    <input type="text" id="username" name="username" placeholder="Lietotājvārds" required="required" />
+                </div>
+                <div class="medium-4 columns"></div>
+            </div>
+            <div class="row">
+                <div class="small-5 columns">
+                    <label for="email" class="right inline">E-pasts</label>
+                </div>
+                <div class="small-3 columns">
+                    <input type="text" id="email" name="email" placeholder="E-pasts" required="required" />
+                </div>
+                <div class="medium-4 columns"></div>
+            </div>
+            <input type="submit" name="add" value="Pievienot" class="button" />
+        </form>
+</div>

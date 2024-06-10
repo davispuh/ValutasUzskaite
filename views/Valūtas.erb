@@ -1,0 +1,76 @@
+<div class="row">
+    <div class="text-center">
+        <h3>Valūtas</h3>
+    </div>
+</div>
+<% if iserror == 1 or iserror == 2 %><div class="row">
+    <div class="medium-4 columns"></div>
+    <div class="small-4 columns small-centered">
+        <% if iserror == 1 %><small class="alert-box warning radius text-center bold">Kļūda!</small>
+        <% else %><div class="alert-box success radius text-center bold">Darbība izpildīta!</div><% end %>
+    </div>
+    <div class="medium-4 columns"></div>
+</div><% end %>
+<div class="row padtop text-center">
+    <table class="center">
+        <thead>
+            <tr>
+                <th class="text-center">Apzīmējums</th>
+                <th class="text-center">Nosaukums</th>
+                <th class="text-center">Apjoms</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <% currencies.each do |c| %><tr>
+                <form method="POST">
+                    <td><%= h c.Apzīmējums %></td>
+                    <td><%= h c.Nosaukums %></td>
+                    <td><input type="text" id="amount" name="amount" value="<%= h c.amount.Apjoms %>" required="required" class="center" /></td>
+                    <td>
+                        <input type="hidden" name="id" value="<%= c.id %>" />
+                        <input type="submit" name="save" value="Saglabāt" class="tiny success button center bold" />
+                        <a href="/Admin/Valūtas/Dzēst/<%= c.id %>" class="tiny alert button center bold" />Izdzēst</a>
+                    </td>
+                </form>
+            </tr><% end %>
+        </tbody>
+    </table>
+</div>
+<div class="row padtop">
+    <div class="text-center">
+        <h3>Pievienot Valūtu</h3>
+    </div>
+</div>
+<div class="row text-center">
+        <form method="POST">
+            <div class="row">
+                <div class="small-5 columns">
+                    <label for="identifier" class="right inline">Valūtas identifikators</label>
+                </div>
+                <div class="small-3 columns">
+                    <input type="text" id="identifier" name="identifier" placeholder="Identifikators" required="required" />
+                </div>
+                <div class="medium-4 columns"></div>
+            </div>
+            <div class="row">
+                <div class="small-5 columns">
+                    <label for="name" class="right inline">Valūtas nosaukums</label>
+                </div>
+                <div class="small-3 columns">
+                    <input type="text" id="name" name="name" placeholder="Nosaukums" required="required" />
+                </div>
+                <div class="medium-4 columns"></div>
+            </div>
+            <div class="row">
+                <div class="small-5 columns">
+                    <label for="amount" class="right inline">Apjoms</label>
+                </div>
+                <div class="small-3 columns">
+                    <input type="text" id="amount" name="amount" placeholder="Apjoms" required="required" />
+                </div>
+                <div class="medium-4 columns"></div>
+            </div>
+            <input type="submit" name="add" value="Pievienot valūtu" class="button" />
+        </form>
+</div>

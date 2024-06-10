@@ -1,0 +1,69 @@
+<div class="row">
+    <div class="text-center">
+        <h3>Valūtu kursi</h3>
+    </div>
+</div>
+<div class="row">
+    <div class="small-5 columns">
+        <label for="currency" class="right inline">Valūta</label>
+    </div>
+    <div class="small-3 columns">
+        <select id="currency" name="currency">
+            <% currencies.each do |n| %><option value="<%= h n %>"><%= h n %></option><% end %>
+        </select>
+    </div>
+    <div class="medium-4 columns"></div>
+</div>
+<div class="row">
+    <div class="small-2 columns small-centered text-center" id="data">
+        <table>
+            <thead>
+                <tr>
+                    <th>Valūta</th>
+                    <th>Kurss</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div>
+    <div class="medium-6 columns"></div>
+</div>
+<script>
+    // <![CDATA[
+     var Rates = <%= rates.to_json; %>;
+     var Currencies = <%= currencies.to_json; %>;
+
+     function get_rate(from, to) {
+        var rate = 0;
+        if (from == 'EUR') {
+            rate = Rates[to] || 1;
+        } else {
+            rate = ((Rates[to] || 1) / get_rate('EUR', from)).toFixed(6);
+        }
+        return rate;
+     };
+
+     function build_row(from, to) {
+        return '<tr><td>' + to + '</td><td>' + get_rate(from, to) + '</td></tr>';
+     };
+
+     function fill_data(from) {
+        $('#data tbody tr').remove();
+        data = '';
+        for (var i = 0; i < Currencies.length; i++) {
+            if (from == Currencies[i]) continue;
+            data += build_row(from, Currencies[i]);
+        };
+        $('#data tbody').append(data);
+     };
+
+     $( document ).ready(function() {
+        fill_data($("#currency").val());
+     });
+
+     $("#currency").on("change", function(event) {
+        fill_data(this.value);
+     });
+    // ]]>
+</script>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <title>Valūtas uzskaites sistēma</title>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="/css/normalize.css" />
+        <link rel="stylesheet" href="/css/foundation.css" />
+        <link rel="stylesheet" href="/css/application.css" />
+        <script src="/js/vendor/modernizr.js"></script>
+        <script src="/js/vendor/jquery.js"></script>
+    </head>
+    <body>
+        <% if @username or @admin %><nav class="top-bar" data-topbar role="navigation">
+            <ul class="title-area">
+                <li class="name"></li>
+                <li class="toggle-topbar menu-icon"><a href="#"><span>Izvēlne</span></a></li>
+            </ul>
+            <section class="top-bar-section">
+                <ul class="left"><% if @admin %>
+                    <li<% if @page == 'Valūtas' %> class="active"<% end %>><a href="/Admin/Valūtas">Valūtas</a></li>
+                    <li<% if @page == 'Grāmatveži' %> class="active"<% end %>><a href="/Admin/Grāmatveži">Grāmatveži</a></li>
+                    <% else %><li<% if @page == 'Apjomi' %> class="active"<% end %>><a href="/Apjomi">Valūtas apjomi</a></li>
+                    <li<% if @page == 'Kurss' %> class="active"<% end %>><a href="/Kurss">Valūtas kurss</a></li>
+                    <li<% if @page == 'Parole' %> class="active"<% end %>><a href="/Parole">Paroles maiņa</a></li>
+                    <% end %><li><a href="/Iziet">Iziet</a></li>
+                </ul>
+            </section>
+        </nav><% end %>
+        <%= yield %>
+        <script src="/js/foundation.min.js"></script>
+        <script>
+            // <![CDATA[
+            $(document).foundation();
+            // ]]>
+        </script>
+    </body>
+</html>

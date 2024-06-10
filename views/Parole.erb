@@ -1,0 +1,36 @@
+<div class="row padtop">
+    <div class="text-center">
+        <h3>Mainīt paroli</h3>
+    </div>
+</div>
+<div class="row text-center padtop">
+    <form method="POST">
+<% if iserror == 1 or iserror == 2 %><div class="row">
+    <div class="medium-4 columns"></div>
+    <div class="small-4 columns small-centered">
+        <% if iserror == 1 %><div class="alert-box warning radius text-center">Kļūda!</div>
+        <% else %><div class="alert-box success radius text-center">Parole nomainīta!</div><% end %>
+    </div>
+    <div class="medium-4 columns"></div>
+</div><% end %>
+        <div class="row">
+            <div class="small-5 columns">
+                <label for="password" class="right inline">Pašreizējā parole</label>
+            </div>
+            <div class="small-3 columns">
+                <input type="password" id="password" name="password" placeholder="Parole" required="required" />
+            </div>
+            <div class="medium-4 columns"></div>
+        </div>
+        <div class="row">
+            <div class="small-5 columns">
+                <label for="newpassword" class="right inline">Jaunā parole</label>
+            </div>
+            <div class="small-3 columns">
+                <input type="password" id="newpassword" name="newpassword" placeholder="Parole" required="required" />
+            </div>
+            <div class="medium-4 columns"></div>
+        </div>
+        <input type="submit" name="change" value="Mainīt paroli" class="button" />
+    </form>
+</div>
